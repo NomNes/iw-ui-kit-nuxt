@@ -33,6 +33,7 @@ export default class RemoveButton extends Vue {
       if (result) {
         this.loading = false
         this.open = false
+        this.$emit('removed', true)
         if (this.listLink) return this.$router.push(this.listLink)
       }
     }
