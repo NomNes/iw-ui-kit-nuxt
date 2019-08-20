@@ -10,7 +10,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 export default class FormButton extends Vue {
   @Prop({ type: String, default: 'white', validator: value => ['white', 'green', 'red', 'blue', 'yellow', 'black'].includes(value) }) color!: string;
   @Prop({ type: Boolean }) inline!: boolean;
-  @Prop({ type: String, default: 'button', validator: value => ['button', 'router-link', 'a', 'div'].includes(value) }) type!: string;
+  @Prop({ type: String, default: 'button', validator: value => ['button', 'router-link', 'nuxt-link', 'a', 'div'].includes(value) }) type!: string;
   @Prop({ type: Boolean }) disabled!: boolean;
   @Prop({ type: Boolean }) loading!: boolean;
   @Prop({ type: String }) to!: string;
