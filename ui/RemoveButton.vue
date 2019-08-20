@@ -1,9 +1,9 @@
 <template lang="pug">
-    main
-        FormButton(color="red" @click="openPopup" :disabled="disabled" :loading="loading")
-            fa(icon="trash-alt")
-            |  Удалить
-        ConfirmPopup(v-if="open" @close="closePopup" @cancel="closePopup" @confirm="remove")
+  main
+    FormButton(color="red" @click="openPopup" :disabled="disabled" :loading="loading")
+      fa(icon="trash-alt")
+      |  Удалить
+    ConfirmPopup(v-if="open" @close="closePopup" @cancel="closePopup" @confirm="remove")
 </template>
 
 <script lang="ts">
@@ -30,7 +30,11 @@ export default class RemoveButton extends Vue {
     if (!this.disabled && !this.loading) {
       this.loading = true
       const result = await this.$store.dispatch(this.action, this.params)
-      if (result && this.listLink) return this.$router.push(this.listLink)
+      if (result) {
+        this.loading = false
+        this.open = false
+        if (this.listLink) return this.$router.push(this.listLink)
+      }
     }
   }
 
