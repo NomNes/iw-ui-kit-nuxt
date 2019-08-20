@@ -33,6 +33,7 @@ export default class SaveButton extends Vue {
       if (!this.disabled) {
         const resultId = await this.$store.dispatch(this.action, Object.assign(this.params, { data: this.value }))
         this.loading = false
+        this.$emit('saved', !!resultId)
         if (resultId && this.itemLink && this.value.id !== resultId) this.$router.push(this.itemLink.replace('[id]', resultId))
       }
     }, 50)
