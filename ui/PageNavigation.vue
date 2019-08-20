@@ -10,53 +10,53 @@
 </template>
 
 <script lang="ts">
-    import {Component, Vue, Prop} from "vue-property-decorator";
+import { Component, Vue, Prop } from 'vue-property-decorator'
 
-    @Component
-    export default class PageNavigation extends Vue {
-        @Prop({type: Number, default: 1}) page!: number;
-        @Prop({type: Number, default: 1}) pages!: number;
-        @Prop({type: Number, default: 9}) displayItems!: number;
+@Component
+export default class PageNavigation extends Vue {
+  @Prop({ type: Number, default: 1 }) page!: number;
+  @Prop({ type: Number, default: 1 }) pages!: number;
+  @Prop({ type: Number, default: 9 }) displayItems!: number;
 
-        get pageList() {
-            const list = [];
+  get pageList () {
+    const list = []
 
-            let itemsAround = Math.ceil((this.displayItems - 1) / 2);
+    let itemsAround = Math.ceil((this.displayItems - 1) / 2)
 
-            let min = this.page - itemsAround;
-            let max = this.page + itemsAround;
+    let min = this.page - itemsAround
+    let max = this.page + itemsAround
 
-            if (min < 1) {
-                max -= min - 1;
-                min = 1;
-            }
-            if (max > this.pages) {
-                min -= max - this.pages;
-                max = this.pages
-            }
-            if (min < 1) min = 1;
-
-            for (let p = min; p <= max; p++) {
-                list.push(p)
-            }
-
-            if (list[0] > 1) {
-                list[0] = 1;
-                list[1] = "...";
-            }
-
-            if (list[list.length - 1] < this.pages) {
-                list[list.length - 1] = this.pages;
-                list[list.length - 2] = "...";
-            }
-
-            return list
-        }
-
-        setPage(pageNumber: number) {
-            this.$router.push({query: {page: pageNumber > 1 ? `${pageNumber}` : undefined}})
-        }
+    if (min < 1) {
+      max -= min - 1
+      min = 1
     }
+    if (max > this.pages) {
+      min -= max - this.pages
+      max = this.pages
+    }
+    if (min < 1) min = 1
+
+    for (let p = min; p <= max; p++) {
+      list.push(p)
+    }
+
+    if (list[0] > 1) {
+      list[0] = 1
+      list[1] = '...'
+    }
+
+    if (list[list.length - 1] < this.pages) {
+      list[list.length - 1] = this.pages
+      list[list.length - 2] = '...'
+    }
+
+    return list
+  }
+
+  setPage (pageNumber: number) {
+    this.$router.push({ query: Object.assign({}, this.$route.query, { page: pageNumber > 1 ? `${pageNumber}` : undefined }) })
+  }
+}
 </script>
 
 <style lang="stylus">
@@ -83,7 +83,6 @@
                     left 0
                 &.next
                     right 0
-
 
     @media screen and (min-width: desktop_width)
         .page-navigation
