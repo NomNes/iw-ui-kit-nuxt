@@ -1,5 +1,5 @@
 <template lang="pug">
-    FormItem.form-datatime(:label="label" :loading="loading" :invalid="localInvalid" :info="info" :disabled="disabled" icon="calendar-alt" @click="openCalendar")
+    FormItem.form-datetime(:label="label" :loading="loading" :invalid="localInvalid" :info="info" :disabled="disabled" icon="calendar-alt" @click="openCalendar")
         .datetime-label {{ formattedDateTime }}
         .datetime-picker(@click.stop="() => false" v-if="pickerOpen")
             FormSelect.month(v-model="pickerDateMonth" :items="monthList")
@@ -201,7 +201,7 @@ export default class FormDateTime extends Vue {
 <style lang="stylus">
     @require "../assets/VAR.styl"
 
-    .form-datatime
+    .form-datetime
         .datetime-label
             height 30px
             line-height 30px
@@ -223,6 +223,7 @@ export default class FormDateTime extends Vue {
             display flex
             flex-wrap wrap
             justify-content center
+            z-index 5
             .year
                 width 80px
             .month
@@ -250,7 +251,6 @@ export default class FormDateTime extends Vue {
                     display flex
                     font-weight bold
                 .days
-
                     display flex
                     flex-wrap wrap
 </style>
